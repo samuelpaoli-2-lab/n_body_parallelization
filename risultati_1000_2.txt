@@ -1,0 +1,62 @@
+--- Test con 1000 corpi, dt = 0.1 e T = 60 ---
+--- Esecuzione con 1 thread e schedule static---
+Tempo di esecuzione: 1.456739 
+Tempo di esecuzione: 1.603173 
+Tempo di esecuzione: 1.514169 
+Tempo di esecuzione: 1.488964 
+Tempo di esecuzione: 1.471588 
+--- Esecuzione con 2 thread e schedule static---
+Tempo di esecuzione: 1.010663 
+Tempo di esecuzione: 1.357898 
+Tempo di esecuzione: 1.319300 
+Tempo di esecuzione: 1.303932 
+Tempo di esecuzione: 1.352444 
+--- Esecuzione con 4 thread e schedule static---
+Tempo di esecuzione: 1.709061 
+Tempo di esecuzione: 1.549004 
+Tempo di esecuzione: 1.576205 
+Tempo di esecuzione: 1.857650 
+Tempo di esecuzione: 1.685289 
+--- Esecuzione con 8 thread e schedule static---
+Tempo di esecuzione: 0.939226 
+Tempo di esecuzione: 1.050603 
+Tempo di esecuzione: 1.025242 
+Tempo di esecuzione: 1.014437 
+Tempo di esecuzione: 1.017890 
+--- Esecuzione con 12 thread e schedule static---
+Tempo di esecuzione: 1.163248 
+Tempo di esecuzione: 1.054135 
+Tempo di esecuzione: 1.183186 
+Tempo di esecuzione: 1.095552 
+Tempo di esecuzione: 1.163531 
+--- Esecuzione con 1 thread e schedule dynamic---
+Tempo di esecuzione: 2.317708 
+Tempo di esecuzione: 2.053482 
+Tempo di esecuzione: 2.139945 
+Tempo di esecuzione: 2.038313 
+Tempo di esecuzione: 1.996593 
+--- Esecuzione con 2 thread e schedule dynamic---
+Tempo di esecuzione: 1.204169 
+Tempo di esecuzione: 1.325967 
+Tempo di esecuzione: 1.343984 
+Tempo di esecuzione: 1.339498 
+Tempo di esecuzione: 1.559803 
+--- Esecuzione con 4 thread e schedule dynamic---
+Tempo di esecuzione: 1.129280 
+Tempo di esecuzione: 1.050561 
+Tempo di esecuzione: 1.022732 
+Tempo di esecuzione: 1.005190 
+Tempo di esecuzione: 1.117918 
+--- Esecuzione con 8 thread e schedule dynamic---
+Tempo di esecuzione: 0.840586 
+Tempo di esecuzione: 0.874698 
+Tempo di esecuzione: 0.874305 
+Tempo di esecuzione: 0.873043 
+Tempo di esecuzione: 0.869730 
+--- Esecuzione con 12 thread e schedule dynamic---
+Tempo di esecuzione: 0.957332 
+Tempo di esecuzione: 1.051523 
+Tempo di esecuzione: 1.018102 
+Tempo di esecuzione: 1.162050 
+Tempo di esecuzione: 1.382823 
+Test completati!

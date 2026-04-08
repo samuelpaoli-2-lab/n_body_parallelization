@@ -1,0 +1,57 @@
+--- Test con 8000 corpi, dt = 0.1 e T = 60 ---
+--- Esecuzione con 1 thread ---
+Tempo di esecuzione: 148.071348 
+Tempo di esecuzione: 126.363885 
+Tempo di esecuzione: 126.246190 
+Tempo di esecuzione: 125.359943 
+Tempo di esecuzione: 151.027665 
+Tempo di esecuzione: 125.196355 
+Tempo di esecuzione: 125.281345 
+Tempo di esecuzione: 123.205005 
+Tempo di esecuzione: 123.332552 
+Tempo di esecuzione: 132.660751 
+--- Esecuzione con 2 thread ---
+Tempo di esecuzione: 73.697728 
+Tempo di esecuzione: 85.687324 
+Tempo di esecuzione: 70.997963 
+Tempo di esecuzione: 78.115194 
+Tempo di esecuzione: 83.831345 
+Tempo di esecuzione: 68.199134 
+Tempo di esecuzione: 83.937258 
+Tempo di esecuzione: 78.119997 
+Tempo di esecuzione: 80.956668 
+Tempo di esecuzione: 80.014616 
+--- Esecuzione con 4 thread ---
+Tempo di esecuzione: 66.967755 
+Tempo di esecuzione: 64.917058 
+Tempo di esecuzione: 65.090317 
+Tempo di esecuzione: 77.834710 
+Tempo di esecuzione: 80.738863 
+Tempo di esecuzione: 64.582887 
+Tempo di esecuzione: 65.084998 
+Tempo di esecuzione: 65.550132 
+Tempo di esecuzione: 64.630960 
+Tempo di esecuzione: 65.084033 
+--- Esecuzione con 8 thread ---
+Tempo di esecuzione: 52.682785 
+Tempo di esecuzione: 54.994196 
+Tempo di esecuzione: 54.881892 
+Tempo di esecuzione: 72.081739 
+Tempo di esecuzione: 52.954527 
+Tempo di esecuzione: 52.328123 
+Tempo di esecuzione: 52.177443 
+Tempo di esecuzione: 52.305977 
+Tempo di esecuzione: 54.270010 
+Tempo di esecuzione: 44.240328 
+--- Esecuzione con 12 thread ---
+Tempo di esecuzione: 49.716183 
+Tempo di esecuzione: 58.280459 
+Tempo di esecuzione: 39.813348 
+Tempo di esecuzione: 46.025598 
+Tempo di esecuzione: 53.648808 
+Tempo di esecuzione: 37.558899 
+Tempo di esecuzione: 43.512699 
+Tempo di esecuzione: 33.835095 
+Tempo di esecuzione: 38.574597 
+Tempo di esecuzione: 42.984264 
+Test completati!
