@@ -1,0 +1,57 @@
+--- Test con 8000 corpi, dt = 0.1 e T = 60 ---
+--- Esecuzione con 1 thread e schedule static---
+Tempo di esecuzione: 95.567199 
+Tempo di esecuzione: 95.440873 
+Tempo di esecuzione: 95.443409 
+Tempo di esecuzione: 95.422677 
+Tempo di esecuzione: 95.666547 
+Tempo di esecuzione: 95.376457 
+Tempo di esecuzione: 95.370860 
+Tempo di esecuzione: 95.422197 
+Tempo di esecuzione: 95.419947 
+Tempo di esecuzione: 95.421959 
+--- Esecuzione con 2 thread e schedule static---
+Tempo di esecuzione: 48.701969 
+Tempo di esecuzione: 48.606623 
+Tempo di esecuzione: 48.802336 
+Tempo di esecuzione: 48.578911 
+Tempo di esecuzione: 48.796788 
+Tempo di esecuzione: 48.578497 
+Tempo di esecuzione: 48.768083 
+Tempo di esecuzione: 48.698862 
+Tempo di esecuzione: 48.700383 
+Tempo di esecuzione: 48.734995 
+--- Esecuzione con 4 thread e schedule static---
+Tempo di esecuzione: 25.328722 
+Tempo di esecuzione: 25.148560 
+Tempo di esecuzione: 25.179969 
+Tempo di esecuzione: 25.306317 
+Tempo di esecuzione: 25.186498 
+Tempo di esecuzione: 25.234413 
+Tempo di esecuzione: 25.318026 
+Tempo di esecuzione: 25.146608 
+Tempo di esecuzione: 25.133445 
+Tempo di esecuzione: 25.444589 
+--- Esecuzione con 8 thread e schedule static---
+Tempo di esecuzione: 25.985653 
+Tempo di esecuzione: 26.008343 
+Tempo di esecuzione: 26.113298 
+Tempo di esecuzione: 25.920068 
+Tempo di esecuzione: 25.938167 
+Tempo di esecuzione: 25.935375 
+Tempo di esecuzione: 25.963934 
+Tempo di esecuzione: 25.834240 
+Tempo di esecuzione: 26.019603 
+Tempo di esecuzione: 25.906777 
+--- Esecuzione con 12 thread e schedule static---
+Tempo di esecuzione: 26.070924 
+Tempo di esecuzione: 26.015768 
+Tempo di esecuzione: 25.887491 
+Tempo di esecuzione: 25.974626 
+Tempo di esecuzione: 25.974562 
+Tempo di esecuzione: 25.915248 
+Tempo di esecuzione: 25.875397 
+Tempo di esecuzione: 26.001957 
+Tempo di esecuzione: 25.911131 
+Tempo di esecuzione: 25.957729 
+--- Esecuzione con 1 thread e schedule dynamic---
