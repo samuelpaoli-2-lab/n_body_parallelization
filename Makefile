@@ -114,35 +114,12 @@ test_all_8_0: $(target)
 	@echo "Test completati!"
 
 test_all_multi_8_0_sch: $(target)
-	@echo "--- Test con 8000 corpi, dt = 0.1 e T = 60 ---"
-	@for t in 1 2 4 8 12; do \
-		echo "--- Esecuzione con $$t thread e schedule static---"; \
-		for i in $$(seq 1 10); do \
-			OMP_SCHEDULE=static OMP_NUM_THREADS=$$t ./$(target) 8000 0.1 60; \
-		done \
-	done
-	@for t in 1 2 4 8 12; do \
-		echo "--- Esecuzione con $$t thread e schedule dynamic---"; \
-		for i in $$(seq 1 10); do \
-			OMP_SCHEDULE=dynamic OMP_NUM_THREADS=$$t ./$(target) 8000 0.1 60; \
-		echo "--- Esecuzione con $$t thread e schedule dynamic---"; \
-		for i in $$(seq 1 10); do \
-			OMP_SCHEDULE=dynamic OMP_NUM_THREADS=$$t ./$(target) 8000 0.1 60; \
-		done \
-	done
 	@for t in 1 2 4 8 12; do \
 		echo "--- Esecuzione con $$t thread e schedule guided---"; \
 		for i in $$(seq 1 10); do \
 			OMP_SCHEDULE=guided OMP_NUM_THREADS=$$t ./$(target) 8000 0.1 60; \
 		done \
 	done
-	@for t in 1 2 4 8 12; do \
-		echo "--- Esecuzione con $$t thread e schedule guided---"; \
-		for i in $$(seq 1 10); do \
-			OMP_SCHEDULE=guided OMP_NUM_THREADS=$$t ./$(target) 8000 0.1 60; \
-		done \
-	done
-	@echo "Test completati!"
 
 test_all_multi_12_0_sch: $(target)
 	@echo "--- Test con 12000 corpi, dt = 0.1 e T = 60 ---"
