@@ -1,0 +1,167 @@
+--- Test con 12000 corpi, dt = 0.1 e T = 60 ---
+--- Esecuzione con 1 thread e schedule static---
+Tempo di esecuzione: 222.960538 
+Tempo di esecuzione: 221.810822 
+Tempo di esecuzione: 221.810617 
+Tempo di esecuzione: 220.767255 
+Tempo di esecuzione: 221.930562 
+Tempo di esecuzione: 221.682022 
+Tempo di esecuzione: 221.597221 
+Tempo di esecuzione: 221.760403 
+Tempo di esecuzione: 220.364108 
+Tempo di esecuzione: 220.310689 
+--- Esecuzione con 2 thread e schedule static---
+Tempo di esecuzione: 132.670898 
+Tempo di esecuzione: 132.403258 
+Tempo di esecuzione: 132.986607 
+Tempo di esecuzione: 132.958379 
+Tempo di esecuzione: 132.374776 
+Tempo di esecuzione: 132.950947 
+Tempo di esecuzione: 134.318845 
+Tempo di esecuzione: 133.333258 
+Tempo di esecuzione: 131.843550 
+Tempo di esecuzione: 132.870317 
+--- Esecuzione con 4 thread e schedule static---
+Tempo di esecuzione: 104.303545 
+Tempo di esecuzione: 104.612177 
+Tempo di esecuzione: 104.645214 
+Tempo di esecuzione: 104.921416 
+Tempo di esecuzione: 103.051968 
+Tempo di esecuzione: 104.740045 
+Tempo di esecuzione: 103.343036 
+Tempo di esecuzione: 103.491362 
+Tempo di esecuzione: 104.591577 
+Tempo di esecuzione: 104.084999 
+--- Esecuzione con 8 thread e schedule static---
+Tempo di esecuzione: 77.203022 
+Tempo di esecuzione: 78.912582 
+Tempo di esecuzione: 79.007926 
+Tempo di esecuzione: 76.922691 
+Tempo di esecuzione: 79.740312 
+Tempo di esecuzione: 78.626163 
+Tempo di esecuzione: 77.581095 
+Tempo di esecuzione: 79.792756 
+Tempo di esecuzione: 77.105895 
+Tempo di esecuzione: 78.883876 
+--- Esecuzione con 12 thread e schedule static---
+Tempo di esecuzione: 66.581696 
+Tempo di esecuzione: 68.899985 
+Tempo di esecuzione: 67.885581 
+Tempo di esecuzione: 68.073633 
+Tempo di esecuzione: 65.974673 
+Tempo di esecuzione: 68.966055 
+Tempo di esecuzione: 68.477480 
+Tempo di esecuzione: 65.653206 
+Tempo di esecuzione: 68.923097 
+Tempo di esecuzione: 65.813333 
+--- Esecuzione con 1 thread e schedule dynamic---
+Tempo di esecuzione: 220.891744 
+Tempo di esecuzione: 221.177896 
+Tempo di esecuzione: 220.575898 
+Tempo di esecuzione: 220.867817 
+Tempo di esecuzione: 219.925379 
+Tempo di esecuzione: 221.905599 
+Tempo di esecuzione: 221.321846 
+Tempo di esecuzione: 220.588258 
+Tempo di esecuzione: 222.210373 
+Tempo di esecuzione: 221.310984 
+--- Esecuzione con 2 thread e schedule dynamic---
+Tempo di esecuzione: 134.111499 
+Tempo di esecuzione: 134.910154 
+Tempo di esecuzione: 132.839227 
+Tempo di esecuzione: 133.917462 
+Tempo di esecuzione: 132.341117 
+Tempo di esecuzione: 133.274087 
+Tempo di esecuzione: 131.579229 
+Tempo di esecuzione: 131.758948 
+Tempo di esecuzione: 132.008893 
+Tempo di esecuzione: 131.867295 
+--- Esecuzione con 4 thread e schedule dynamic---
+Tempo di esecuzione: 97.970734 
+Tempo di esecuzione: 97.405647 
+Tempo di esecuzione: 97.701319 
+Tempo di esecuzione: 96.648338 
+Tempo di esecuzione: 96.015367 
+Tempo di esecuzione: 96.464418 
+Tempo di esecuzione: 98.376378 
+Tempo di esecuzione: 97.903821 
+Tempo di esecuzione: 96.196541 
+Tempo di esecuzione: 96.933523 
+--- Esecuzione con 8 thread e schedule dynamic---
+Tempo di esecuzione: 72.594502 
+Tempo di esecuzione: 69.745653 
+Tempo di esecuzione: 73.204682 
+Tempo di esecuzione: 69.570233 
+Tempo di esecuzione: 72.807415 
+Tempo di esecuzione: 69.655062 
+Tempo di esecuzione: 72.300069 
+Tempo di esecuzione: 71.104579 
+Tempo di esecuzione: 70.853506 
+Tempo di esecuzione: 73.110185 
+--- Esecuzione con 12 thread e schedule dynamic---
+Tempo di esecuzione: 61.823103 
+Tempo di esecuzione: 61.534344 
+Tempo di esecuzione: 63.536400 
+Tempo di esecuzione: 59.601745 
+Tempo di esecuzione: 63.540976 
+Tempo di esecuzione: 61.979982 
+Tempo di esecuzione: 61.948143 
+Tempo di esecuzione: 61.943870 
+Tempo di esecuzione: 60.924444 
+Tempo di esecuzione: 62.983454 
+--- Esecuzione con 1 thread e schedule guided---
+Tempo di esecuzione: 220.399859 
+Tempo di esecuzione: 220.471540 
+Tempo di esecuzione: 220.642591 
+Tempo di esecuzione: 220.031096 
+Tempo di esecuzione: 220.413336 
+Tempo di esecuzione: 219.567603 
+Tempo di esecuzione: 219.770254 
+Tempo di esecuzione: 219.797489 
+Tempo di esecuzione: 220.509077 
+Tempo di esecuzione: 219.637903 
+--- Esecuzione con 2 thread e schedule guided---
+Tempo di esecuzione: 133.574413 
+Tempo di esecuzione: 133.434687 
+Tempo di esecuzione: 132.814794 
+Tempo di esecuzione: 133.395957 
+Tempo di esecuzione: 133.037584 
+Tempo di esecuzione: 133.455015 
+Tempo di esecuzione: 133.755975 
+Tempo di esecuzione: 134.520178 
+Tempo di esecuzione: 134.572781 
+Tempo di esecuzione: 135.730733 
+--- Esecuzione con 4 thread e schedule guided---
+Tempo di esecuzione: 108.982098 
+Tempo di esecuzione: 100.511838 
+Tempo di esecuzione: 103.109702 
+Tempo di esecuzione: 102.590624 
+Tempo di esecuzione: 101.758458 
+Tempo di esecuzione: 102.546531 
+Tempo di esecuzione: 101.970668 
+Tempo di esecuzione: 99.775720 
+Tempo di esecuzione: 101.592127 
+Tempo di esecuzione: 101.434589 
+--- Esecuzione con 8 thread e schedule guided---
+Tempo di esecuzione: 72.207667 
+Tempo di esecuzione: 75.220944 
+Tempo di esecuzione: 75.599381 
+Tempo di esecuzione: 72.711717 
+Tempo di esecuzione: 74.782649 
+Tempo di esecuzione: 74.764661 
+Tempo di esecuzione: 74.770577 
+Tempo di esecuzione: 74.279110 
+Tempo di esecuzione: 74.340293 
+Tempo di esecuzione: 74.770068 
+--- Esecuzione con 12 thread e schedule guided---
+Tempo di esecuzione: 62.373794 
+Tempo di esecuzione: 64.345918 
+Tempo di esecuzione: 67.357401 
+Tempo di esecuzione: 63.615680 
+Tempo di esecuzione: 67.974495 
+Tempo di esecuzione: 68.405611 
+Tempo di esecuzione: 65.555891 
+Tempo di esecuzione: 63.787488 
+Tempo di esecuzione: 63.568333 
+Tempo di esecuzione: 63.640627 
+Test completati!

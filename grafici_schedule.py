@@ -1,78 +1,85 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import re
+from collections import defaultdict
 import os
 
-# 1. IMPOSTAZIONI DEI TEST
-# Associa il nome dello schedule al suo file di testo
-file_schedules = {
-    'Static': 'risultati_8000_static.txt',
-    'Dynamic': 'risultati_8000_dynamic.txt',
-    'Guided': 'risultati_8000_guided.txt'
-}
+# 1. Configurazione: nome del file di testo da leggere
+NOME_FILE = 'risultati_12000_no_lim.txt'
 
-# Colori per i diversi schedule
-colori = {
-    'Static': 'red', 
-    'Dynamic': 'blue', 
-    'Guided': 'green'
-}
+# Struttura per salvare i dati: results['static'][4] = [tempi...]
+results = defaultdict(lambda: defaultdict(list))
 
-plt.figure(figsize=(10, 6))
-print("Elaborazione dei file degli schedule in corso...")
-
-# 2. CICLO SUGLI SCHEDULE
-for nome_schedule, nome_file in file_schedules.items():
+# 2. Lettura e Parsing del file
+with open(NOME_FILE, 'r') as file:
+    current_thread = 0
+    current_schedule = ""
     
-    if not os.path.exists(nome_file):
-        print(f"  -> File '{nome_file}' non trovato. Controlla il nome!")
+    for line in file:
+        # Cerca l'intestazione (es. "--- Esecuzione con 4 thread e schedule static---")
+        match_header = re.search(r'Esecuzione con (\d+) thread e schedule (\w+)', line)
+        if match_header:
+            current_thread = int(match_header.group(1))
+            current_schedule = match_header.group(2)
+            continue
+        
+        # Cerca la riga del tempo (es. "Tempo di esecuzione: 44.317")
+        match_time = re.search(r'Tempo di esecuzione:\s*([\d.]+)', line)
+        if match_time and current_thread > 0:
+            time_val = float(match_time.group(1))
+            results[current_schedule][current_thread].append(time_val)
+
+# 3. Preparazione del grafico
+plt.figure(figsize=(10, 6))
+colors = {'static': 'red', 'dynamic': 'blue', 'guided': 'green'}
+markers = {'static': 'o', 'dynamic': 's', 'guided': '^'}
+
+# Assicuriamoci di processare gli schedule in un ordine preciso per la legenda
+for schedule in ['static', 'dynamic', 'guided']:
+    if schedule not in results:
         continue
         
-    dati_raccolti = {}
+    threads = sorted(results[schedule].keys())
+    means = []
+    stds = []
     
-    # Lettura dei file
-    with open(nome_file, 'r') as file:
-        for linea in file:
-            if "Esecuzione con" in linea:
-                # Prende il numero di thread
-                thread_attuale = int(linea.split()[3])
-                if thread_attuale not in dati_raccolti:
-                    dati_raccolti[thread_attuale] = []
-            elif "Tempo di esecuzione:" in linea:
-                # Prende il tempo
-                tempo = float(linea.split(':')[1].strip())
-                dati_raccolti[thread_attuale].append(tempo)
-
-    # Calcolo medie e deviazioni standard
-    if dati_raccolti:
-        threads = sorted(dati_raccolti.keys())
-        etichette_threads = [str(t) for t in threads]
+    for t in threads:
+        times = results[schedule][t]
         
-        medie_T = [np.mean(dati_raccolti[t]) for t in threads]
-        std_T = [np.std(dati_raccolti[t]) for t in threads]
+        # --- RIMOZIONE OUTLIER (Trimmed Mean) ---
+        # Se abbiamo almeno 4 dati, togliamo il max e il min per pulire le anomalie di Windows
+        if len(times) > 3:
+            times_puliti = sorted(times)[1:-1]
+        else:
+            times_puliti = times
+            
+        means.append(np.mean(times_puliti))
+        stds.append(np.std(times_puliti))
         
-        colore = colori.get(nome_schedule, 'gray')
-        
-        # Disegno della linea per questo schedule
-        plt.errorbar(etichette_threads, medie_T, yerr=std_T, 
-                     fmt='o-', color=colore, ecolor=colore, alpha=0.8,
-                     elinewidth=2, capsize=5, label=f'Schedule {nome_schedule}')
+    # Disegna la linea con le barre di errore
+    plt.errorbar(threads, means, yerr=stds, fmt=f'-{markers[schedule]}', 
+                 color=colors[schedule], label=f'Schedule {schedule.capitalize()}',
+                 capsize=5, capthick=1.5, elinewidth=1.5, markersize=6)
 
-# 3. DECORAZIONI DEL GRAFICO
-plt.title('Confronto Prestazioni: Metodi di Scheduling (8000 particelle)')
-plt.xlabel('Numero di Thread')
-plt.ylabel('Tempo di esecuzione (secondi)')
-plt.grid(True, linestyle=':', alpha=0.7)
-plt.legend()
+# 4. Personalizzazione estetica del grafico
+plt.title('Confronto Metodi di Scheduling (12000 particelle, 10 Run)', fontsize=14, fontweight='bold')
+plt.xlabel('Numero di Thread', fontsize=12)
+plt.ylabel('Tempo di esecuzione (secondi)', fontsize=12)
 
-plt.tight_layout()
+# Forza l'asse X a mostrare solo i valori reali dei thread usati
+plt.xticks(threads) 
 
-# 4. SALVATAGGIO
-nome_cartella = 'grafici_salvati'
+# Griglia e Legenda
+plt.grid(True, linestyle=':', alpha=0.7, color='gray')
+plt.legend(fontsize=11)
+
+nome_cartella='grafici_no_lim'
 if not os.path.exists(nome_cartella):
     os.makedirs(nome_cartella)
 
-nome_file_out = os.path.join(nome_cartella, 'confronto_8000_schedules.png')
-plt.savefig(nome_file_out, dpi=300)
-print(f"Successo! Grafico esportato in: '{nome_file_out}'")
-
+# 5. Salva l'immagine e mostrala
+nome_immagine = os.path.join(nome_cartella, 'confronto_12000_no_lim.png')
+plt.tight_layout()
+plt.savefig(nome_immagine, dpi=300)
+print(f"Grafico salvato con successo come '{nome_immagine}'!")
 plt.show()
