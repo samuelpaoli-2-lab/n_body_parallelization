@@ -5,7 +5,7 @@ from collections import defaultdict
 import os
 
 # 1. Configurazione
-NOME_FILE = 'risultati_8000_fisso_2.txt'
+NOME_FILE = 'risultati_16000.txt'
 results = defaultdict(lambda: defaultdict(list))
 
 # 2. Lettura e Parsing (Stessa logica di pulizia)
@@ -87,7 +87,7 @@ if not os.path.exists(nome_cartella):
     os.makedirs(nome_cartella)
 
 plt.tight_layout()
-nome_immagine = os.path.join(nome_cartella, 'speedup_efficienza_8000_fisso_2.png')
+nome_immagine = os.path.join(nome_cartella, 'speedup_efficienza_16000.png')
 plt.savefig(nome_immagine, dpi=300)
 print(f"Grafico salvato con successo come '{nome_immagine}'!")
 plt.show()

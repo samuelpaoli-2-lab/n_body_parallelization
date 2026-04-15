@@ -14,12 +14,15 @@ struct Body{
     double mass;
 };
 
-void force_velocity_position(vector<Body>& body, double dt){
+void force_velocity_position(vector<Body>& body, double dt, int i){
     int n = body.size();
     const double G = 1/*6.67430e-11*/;
     double sic = 1e-9;
-    #pragma omp parallel shared(body, n, dt, G, sic) default(none)
+    #pragma omp parallel shared(body, n, dt, G, sic, i) default(none)
     {
+        if(i==0){
+        printf("Thread numero %d attivo\n", omp_get_thread_num());
+        }
 
         #pragma omp for schedule(runtime)
         for(int i=0; i<n; ++i){
@@ -66,7 +69,7 @@ int main(int argc, char* argv[]){
     random_device rd;
     mt19937 gen(rd());
 
-    uniform_real_distribution<double> pos_dist(-200, 200);
+    uniform_real_distribution<double> pos_dist(/*-200, 200*/-500, 500);
     uniform_real_distribution<double> vel_dist(-0.5, 0.5);
     uniform_real_distribution<double> mass_dist(1, 10);
 
@@ -80,26 +83,26 @@ int main(int argc, char* argv[]){
         universe.push_back({gen_x, gen_y, gen_vx, gen_vy, gen_mass});
     }
 
-    /*ofstream outFile("punti_prova_progetto.csv");
+    ofstream outFile("punti_prova_progetto.csv");
     outFile << "T";
     for(int i=0; i<num_part; ++i){
         outFile << ",X" << i << ",Y" << i;
     }
-    outFile << "\n";*/
+    outFile << "\n";
 
     double start_time=omp_get_wtime();
      
     for(double i=0; i<=T; i+=dt){
-        force_velocity_position(universe, dt);
-        /*outFile << i;
+        force_velocity_position(universe, dt, i);
+        outFile << i;
 
         for(int j=0; j<num_part;++j){
             outFile << "," << universe[j].x << "," << universe[j].y;
         }
-        outFile << "\n";*/
+        outFile << "\n";
     }
     
-    //outFile.close();
+    outFile.close();
     double end_time=omp_get_wtime();
 
     printf("Tempo di esecuzione: %f \n", end_time-start_time);

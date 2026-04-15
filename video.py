@@ -8,8 +8,8 @@ df = pd.read_csv("punti_prova_progetto.csv")
 
 fig, ax = plt.subplots(figsize=(8, 8))
 ax.set_facecolor('black')
-ax.set_xlim(-400, 400) # Limiti della "scatola"
-ax.set_ylim(-400, 400)
+ax.set_xlim(-800, 800) # Limiti della "scatola"
+ax.set_ylim(-800, 800)
 
 # Creiamo un singolo oggetto "scatter" (molto più veloce per la scheda video)
 scatter = ax.scatter([], [], c='white', s=2) # s=2 è la dimensione dei puntini

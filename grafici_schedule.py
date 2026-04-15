@@ -5,7 +5,7 @@ from collections import defaultdict
 import os
 
 # 1. Configurazione: nome del file di testo da leggere
-NOME_FILE = 'risultati_8000_fisso_2.txt'
+NOME_FILE = 'risultati_16000.txt'
 
 # Struttura per salvare i dati: results['static'][4] = [tempi...]
 results = defaultdict(lambda: defaultdict(list))
@@ -62,7 +62,7 @@ for schedule in ['static', 'dynamic', 'guided']:
                  capsize=5, capthick=1.5, elinewidth=1.5, markersize=6)
 
 # 4. Personalizzazione estetica del grafico
-plt.title('Confronto Metodi di Scheduling (8000 particelle, 10 Run)', fontsize=14, fontweight='bold')
+plt.title('Confronto Metodi di Scheduling (16000 particelle, 10 Run)', fontsize=14, fontweight='bold')
 plt.xlabel('Numero di Thread', fontsize=12)
 plt.ylabel('Tempo di esecuzione (secondi)', fontsize=12)
 
@@ -78,7 +78,7 @@ if not os.path.exists(nome_cartella):
     os.makedirs(nome_cartella)
 
 # 5. Salva l'immagine e mostrala
-nome_immagine = os.path.join(nome_cartella, 'confronto_8000_fisso_2.png')
+nome_immagine = os.path.join(nome_cartella, 'confronto_16000.png')
 plt.tight_layout()
 plt.savefig(nome_immagine, dpi=300)
 print(f"Grafico salvato con successo come '{nome_immagine}'!")
