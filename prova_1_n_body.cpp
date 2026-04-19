@@ -4,56 +4,52 @@
 #include <cstdio>
 #include <cmath>
 #include <fstream>
-#include<random>
+#include <random>
 
 using namespace std;
 
-struct Body{
-    double x, y;
-    double vx, vy;
-    double mass;
+struct Bodies{
+    vector<double> x, y;
+    vector<double> vx, vy;
+    vector<double> mass;
 };
 
-void force_velocity_position(vector<Body>& body, double dt, int i){
-    int n = body.size();
+void force_velocity_position(Bodies& body, double dt){
+    int n = body.x.size();
     const double G = 1/*6.67430e-11*/;
     double sic = 1e-9;
-    #pragma omp parallel shared(body, n, dt, G, sic, i) default(none)
+    #pragma omp parallel shared(body, n, dt, G, sic) default(none)
     {
-        if(i==0){
-        printf("Thread numero %d attivo\n", omp_get_thread_num());
-        }
-
         #pragma omp for schedule(runtime)
         for(int i=0; i<n; ++i){
             double fx = 0, fy = 0;
-            double xi = body[i].x;
-            double yi = body[i].y;
-            double mi = body[i].mass;
+            double xi = body.x[i];
+            double yi = body.y[i];
+            double mi = body.mass[i];
 
             #pragma omp simd reduction(+:fx, fy)
             for(int j=0; j<n; ++j){
 
-                double dx = body[j].x - xi;
-                double dy = body[j].y - yi;
+                double dx = body.x[j] - xi;
+                double dy = body.y[j] - yi;
 
                 double dist = sqrt(dx*dx + dy*dy + sic);
                 double inv = 1.0/(dist*dist*dist);
 
-                double f = (G * mi * body[j].mass)*inv;
+                double f = (G * mi * body.mass[j])*inv;
 
                 fx += f * dx;
                 fy += f * dy;
             }
 
-            body[i].vx += (fx/mi) * dt;
-            body[i].vy += (fy/mi) * dt;
+            body.vx[i] += (fx/mi) * dt;
+            body.vy[i] += (fy/mi) * dt;
         }
 
-        #pragma omp for
+        #pragma omp for nowait
         for(int i=0; i<n; ++i){
-            body[i].x += body[i].vx * dt;
-            body[i].y += body[i].vy * dt;
+            body.x[i] += body.vx[i] * dt;
+            body.y[i] += body.vy[i] * dt;
         }
     }
 }
@@ -64,7 +60,12 @@ int main(int argc, char* argv[]){
     double dt = stod(argv[2]);
     double T = stod(argv[3]);    
 
-    vector <Body> universe; 
+    Bodies universe;
+    universe.x.resize(num_part);
+    universe.y.resize(num_part);
+    universe.vx.resize(num_part);
+    universe.vy.resize(num_part);
+    universe.mass.resize(num_part); 
 
     random_device rd;
     mt19937 gen(rd());
@@ -80,29 +81,33 @@ int main(int argc, char* argv[]){
         double gen_vy = vel_dist(gen);
         double gen_mass = mass_dist(gen);
 
-        universe.push_back({gen_x, gen_y, gen_vx, gen_vy, gen_mass});
+        universe.x[i] = gen_x;
+        universe.y[i] = gen_y;
+        universe.vx[i] = gen_vx;
+        universe.vy[i] = gen_vy;
+        universe.mass[i] = gen_mass;
     }
 
-    ofstream outFile("punti_prova_progetto.csv");
+    /*ofstream outFile("punti_prova_progetto.csv");
     outFile << "T";
     for(int i=0; i<num_part; ++i){
         outFile << ",X" << i << ",Y" << i;
     }
-    outFile << "\n";
+    outFile << "\n";*/
 
     double start_time=omp_get_wtime();
      
     for(double i=0; i<=T; i+=dt){
-        force_velocity_position(universe, dt, i);
-        outFile << i;
+        force_velocity_position(universe, dt);
+        /*outFile << i;
 
         for(int j=0; j<num_part;++j){
-            outFile << "," << universe[j].x << "," << universe[j].y;
+            outFile << "," << universe.x[j] << "," << universe.y[j];
         }
-        outFile << "\n";
+        outFile << "\n";*/
     }
     
-    outFile.close();
+    //outFile.close();
     double end_time=omp_get_wtime();
 
     printf("Tempo di esecuzione: %f \n", end_time-start_time);

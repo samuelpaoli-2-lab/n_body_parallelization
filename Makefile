@@ -9,285 +9,106 @@ $(target): $(target).cpp
 
 test: $(target)
 	@echo "--- Test con 4000 corpi, dt = 0.1 e T = 60 ---"
-	OMP_SCHEDULE=static OMP_NUM_THREADS=24 ./$(target) 4000 0.1 60
+	OMP_SCHEDULE=dynamic OMP_NUM_THREADS=12 ./$(target) 20000 0.1 60
 	@echo "Test completato!"
 
 
-test_all_multi_1_0_sch: $(target)
-	@echo "--- Test con 1000 corpi, dt = 0.1 e T = 60 ---"
-	@for t in 1 2 4 8 12; do \
-		echo "--- Esecuzione con $$t thread e schedule static---"; \
-		for i in $$(seq 1 10); do \
-			OMP_SCHEDULE=static OMP_NUM_THREADS=$$t ./$(target) 1000 0.1 60; \
+test_1000: $(target)
+	@echo "Thread,Schedule,Run,Time" > risultati_1000.csv
+	@for s in static dynamic guided; do \
+		for t in 1 2 4 8 12 16 20 24 28 32; do \
+			echo "Testando $$s con $$t thread..."; \
+			for r in $$(seq 1 5); do \
+				TIME=$$(OMP_SCHEDULE=$$s OMP_NUM_THREADS=$$t ./$(target) 1000 0.1 60 | grep "Tempo" | awk '{print $$NF}'); \
+				echo "$$t,$$s,$$r,$$TIME" >> risultati_1000.csv; \
+			done \
 		done \
 	done
-	@for t in 1 2 4 8 12; do \
-		echo "--- Esecuzione con $$t thread e schedule dynamic---"; \
-		for i in $$(seq 1 10); do \
-			OMP_SCHEDULE=dynamic OMP_NUM_THREADS=$$t ./$(target) 1000 0.1 60; \
-		done \
-	done
-	@for t in 1 2 4 8 12; do \
-		echo "--- Esecuzione con $$t thread e schedule guided---"; \
-		for i in $$(seq 1 10); do \
-			OMP_SCHEDULE=guided OMP_NUM_THREADS=$$t ./$(target) 1000 0.1 60; \
-		done \
-	done
-	@echo "Test completati!"
 
-test_all_multi_2_0_sch: $(target)
-	@echo "--- Test con 2000 corpi, dt = 0.1 e T = 60 ---"
-	@for t in 1 2 4 8 12; do \
-		echo "--- Esecuzione con $$t thread e schedule static---"; \
-		for i in $$(seq 1 10); do \
-			OMP_SCHEDULE=static OMP_NUM_THREADS=$$t ./$(target) 2000 0.1 60; \
+test_2000: $(target)
+	@echo "Thread,Schedule,Run,Time" > risultati_2000.csv
+	@for s in static dynamic guided; do \
+		for t in 1 2 4 8 12 16 20 24 28 32; do \
+			echo "Testando $$s con $$t thread..."; \
+			for r in $$(seq 1 5); do \
+				TIME=$$(OMP_SCHEDULE=$$s OMP_NUM_THREADS=$$t ./$(target) 2000 0.1 60 | grep "Tempo" | awk '{print $$NF}'); \
+				echo "$$t,$$s,$$r,$$TIME" >> risultati_2000.csv; \
+			done \
 		done \
 	done
-	@for t in 1 2 4 8 12; do \
-		echo "--- Esecuzione con $$t thread e schedule dynamic---"; \
-		for i in $$(seq 1 10); do \
-			OMP_SCHEDULE=dynamic OMP_NUM_THREADS=$$t ./$(target) 2000 0.1 60; \
-		done \
-	done
-	@for t in 1 2 4 8 12; do \
-		echo "--- Esecuzione con $$t thread e schedule guided---"; \
-		for i in $$(seq 1 10); do \
-			OMP_SCHEDULE=guided OMP_NUM_THREADS=$$t ./$(target) 2000 0.1 60; \
-		done \
-	done
-	@echo "Test completati!"
 
-test_all_multi_4_0_sch: $(target)
-	@echo "--- Test con 4000 corpi, dt = 0.1 e T = 60 ---"
-	@for t in 1 2 4 8 12; do \
-		echo "--- Esecuzione con $$t thread e schedule static---"; \
-		for i in $$(seq 1 10); do \
-			OMP_SCHEDULE=static OMP_NUM_THREADS=$$t ./$(target) 4000 0.1 60; \
+test_4000: $(target)
+	@echo "Thread,Schedule,Run,Time" > risultati_4000.csv
+	@for s in static dynamic guided; do \
+		for t in 1 2 4 8 12 16 20 24 28 32; do \
+			echo "Testando $$s con $$t thread..."; \
+			for r in $$(seq 1 5); do \
+				TIME=$$(OMP_SCHEDULE=$$s OMP_NUM_THREADS=$$t ./$(target) 4000 0.1 60 | grep "Tempo" | awk '{print $$NF}'); \
+				echo "$$t,$$s,$$r,$$TIME" >> risultati_4000.csv; \
+			done \
 		done \
 	done
-	@for t in 1 2 4 8 12; do \
-		echo "--- Esecuzione con $$t thread e schedule dynamic---"; \
-		for i in $$(seq 1 10); do \
-			OMP_SCHEDULE=dynamic OMP_NUM_THREADS=$$t ./$(target) 4000 0.1 60; \
-		done \
-	done
-	@for t in 1 2 4 8 12; do \
-		echo "--- Esecuzione con $$t thread e schedule guided---"; \
-		for i in $$(seq 1 10); do \
-			OMP_SCHEDULE=guided OMP_NUM_THREADS=$$t ./$(target) 4000 0.1 60; \
-		done \
-	done
-	@echo "Test completati!"
 
-test_all_multi_8_0_sch: $(target)
-	@for t in 1 2 4 8 12; do \
-		echo "--- Esecuzione con $$t thread e schedule static---"; \
-		for i in $$(seq 1 10); do \
-			OMP_SCHEDULE=static OMP_NUM_THREADS=$$t ./$(target) 8000 0.1 60; \
+test_8000: $(target)
+	@echo "Thread,Schedule,Run,Time" > risultati_8000.csv
+	@for s in static dynamic guided; do \
+		for t in 1 2 4 8 12 16 20 24 28 32; do \
+			echo "Testando $$s con $$t thread..."; \
+			for r in $$(seq 1 5); do \
+				TIME=$$(OMP_SCHEDULE=$$s OMP_NUM_THREADS=$$t ./$(target) 8000 0.1 60 | grep "Tempo" | awk '{print $$NF}'); \
+				echo "$$t,$$s,$$r,$$TIME" >> risultati_8000.csv; \
+			done \
 		done \
 	done
-	@for t in 1 2 4 8 12; do \
-		echo "--- Esecuzione con $$t thread e schedule dynamic---"; \
-		for i in $$(seq 1 10); do \
-			OMP_SCHEDULE=dynamic OMP_NUM_THREADS=$$t ./$(target) 8000 0.1 60; \
-		done \
-	done
-	@for t in 1 2 4 8 12; do \
-		echo "--- Esecuzione con $$t thread e schedule guided---"; \
-		for i in $$(seq 1 10); do \
-			OMP_SCHEDULE=guided OMP_NUM_THREADS=$$t ./$(target) 8000 0.1 60; \
-		done \
-	done
-	@echo "Test completati!"
 
-test_all_multi_12_0_sch: $(target)
-	@echo "--- Test con 12000 corpi, dt = 0.1 e T = 60 ---"
-	@for t in 1 2 4 8 12; do \
-		echo "--- Esecuzione con $$t thread e schedule static---"; \
-		for i in $$(seq 1 10); do \
-			OMP_SCHEDULE=static OMP_NUM_THREADS=$$t ./$(target) 12000 0.1 60; \
+test_12000: $(target)
+	@echo "Thread,Schedule,Run,Time" > risultati_12000.csv
+	@for s in static dynamic guided; do \
+		for t in 1 2 4 8 12 16 20 24 28 32; do \
+			echo "Testando $$s con $$t thread..."; \
+			for r in $$(seq 1 5); do \
+				TIME=$$(OMP_SCHEDULE=$$s OMP_NUM_THREADS=$$t ./$(target) 12000 0.1 60 | grep "Tempo" | awk '{print $$NF}'); \
+				echo "$$t,$$s,$$r,$$TIME" >> risultati_12000.csv; \
+			done \
 		done \
 	done
-	@for t in 1 2 4 8 12; do \
-		echo "--- Esecuzione con $$t thread e schedule dynamic---"; \
-		for i in $$(seq 1 10); do \
-			OMP_SCHEDULE=dynamic OMP_NUM_THREADS=$$t ./$(target) 12000 0.1 60; \
-		done \
-	done
-	@for t in 1 2 4 8 12; do \
-		echo "--- Esecuzione con $$t thread e schedule guided---"; \
-		for i in $$(seq 1 10); do \
-			OMP_SCHEDULE=guided OMP_NUM_THREADS=$$t ./$(target) 12000 0.1 60; \
-		done \
-	done
-	@echo "Test completati!"
 
+test_16000: $(target)
+	@echo "Thread,Schedule,Run,Time" > risultati_16000.csv
+	@for s in static dynamic guided; do \
+		for t in 1 2 4 8 12 16 20 24 28 32; do \
+			echo "Testando $$s con $$t thread..."; \
+			for r in $$(seq 1 5); do \
+				TIME=$$(OMP_SCHEDULE=$$s OMP_NUM_THREADS=$$t ./$(target) 16000 0.1 60 | grep "Tempo" | awk '{print $$NF}'); \
+				echo "$$t,$$s,$$r,$$TIME" >> risultati_16000.csv; \
+			done \
+		done \
+	done
 
-test_1_over_12_sch: $(target)
-	@echo "--- Test con 1000 corpi, dt = 0.1 e T = 60 ---"
-	@for t in 16 20 24 28 32; do \
-		echo "--- Esecuzione con $$t thread e schedule static---"; \
-		for i in $$(seq 1 10); do \
-			OMP_SCHEDULE=static OMP_NUM_THREADS=$$t ./$(target) 1000 0.1 60; \
+test_20000: $(target)
+	@echo "Thread,Schedule,Run,Time" > risultati_20000.csv
+	@for s in static dynamic guided; do \
+		for t in 1 2 4 8 12 16 20 24 28 32; do \
+			echo "Testando $$s con $$t thread..."; \
+			for r in $$(seq 1 5); do \
+				TIME=$$(OMP_SCHEDULE=$$s OMP_NUM_THREADS=$$t ./$(target) 20000 0.1 60 | grep "Tempo" | awk '{print $$NF}'); \
+				echo "$$t,$$s,$$r,$$TIME" >> risultati_20000.csv; \
+			done \
 		done \
 	done
-	@for t in 16 20 24 28 32; do \
-		echo "--- Esecuzione con $$t thread e schedule dynamic---"; \
-		for i in $$(seq 1 10); do \
-			OMP_SCHEDULE=dynamic OMP_NUM_THREADS=$$t ./$(target) 1000 0.1 60; \
-		done \
-	done
-	@for t in 16 20 24 28 32; do \
-		echo "--- Esecuzione con $$t thread e schedule guided---"; \
-		for i in $$(seq 1 10); do \
-			OMP_SCHEDULE=guided OMP_NUM_THREADS=$$t ./$(target) 1000 0.1 60; \
-		done \
-	done
-	@echo "Test completati!"
 
-test_2_over_12_sch: $(target)
-	@echo "--- Test con 2000 corpi, dt = 0.1 e T = 60 ---"
-	@for t in 16 20 24 28 32; do \
-		echo "--- Esecuzione con $$t thread e schedule static---"; \
-		for i in $$(seq 1 10); do \
-			OMP_SCHEDULE=static OMP_NUM_THREADS=$$t ./$(target) 2000 0.1 60; \
+test_single_20000: $(target)
+	@echo "Thread,Schedule,Time" > risultati_20000_single1.csv
+	@for s in dynamic guided; do \
+		for t in 1 2 4 8 12 16 32 64 128 256 512 1024; do \
+			echo "Testando $$s con $$t thread..."; \
+			TIME=$$(OMP_SCHEDULE=$$s OMP_NUM_THREADS=$$t ./$(target) 20000 0.1 60 | grep "Tempo" | awk '{print $$NF}'); \
+			echo "$$t,$$s,$$TIME" >> risultati_20000_single1.csv; \
+			sleep 240; \
 		done \
 	done
-	@for t in 16 20 24 28 32; do \
-		echo "--- Esecuzione con $$t thread e schedule dynamic---"; \
-		for i in $$(seq 1 10); do \
-			OMP_SCHEDULE=dynamic OMP_NUM_THREADS=$$t ./$(target) 2000 0.1 60; \
-		done \
-	done
-	@for t in 16 20 24 28 32; do \
-		echo "--- Esecuzione con $$t thread e schedule guided---"; \
-		for i in $$(seq 1 10); do \
-			OMP_SCHEDULE=guided OMP_NUM_THREADS=$$t ./$(target) 2000 0.1 60; \
-		done \
-	done
-	@echo "Test completati!"
-
-test_4_over_12_sch: $(target)
-	@echo "--- Test con 4000 corpi, dt = 0.1 e T = 60 ---"
-	@for t in 16 20 24 28 32; do \
-		echo "--- Esecuzione con $$t thread e schedule static---"; \
-		for i in $$(seq 1 10); do \
-			OMP_SCHEDULE=static OMP_NUM_THREADS=$$t ./$(target) 4000 0.1 60; \
-		done \
-	done
-	@for t in 16 20 24 28 32; do \
-		echo "--- Esecuzione con $$t thread e schedule dynamic---"; \
-		for i in $$(seq 1 10); do \
-			OMP_SCHEDULE=dynamic OMP_NUM_THREADS=$$t ./$(target) 4000 0.1 60; \
-		done \
-	done
-	@for t in 16 20 24 28 32; do \
-		echo "--- Esecuzione con $$t thread e schedule guided---"; \
-		for i in $$(seq 1 10); do \
-			OMP_SCHEDULE=guided OMP_NUM_THREADS=$$t ./$(target) 4000 0.1 60; \
-		done \
-	done
-	@echo "Test completati!"
 	
-test_8_over_12_sch: $(target)
-	@echo "--- Test con 8000 corpi, dt = 0.1 e T = 60 ---"
-	@for t in 16 20 24 28 32; do \
-		echo "--- Esecuzione con $$t thread e schedule static---"; \
-		for i in $$(seq 1 10); do \
-			OMP_SCHEDULE=static OMP_NUM_THREADS=$$t ./$(target) 8000 0.1 60; \
-		done \
-	done
-	@for t in 16 20 24 28 32; do \
-		echo "--- Esecuzione con $$t thread e schedule dynamic---"; \
-		for i in $$(seq 1 10); do \
-			OMP_SCHEDULE=dynamic OMP_NUM_THREADS=$$t ./$(target) 8000 0.1 60; \
-		done \
-	done
-	@for t in 16 20 24 28 32; do \
-		echo "--- Esecuzione con $$t thread e schedule guided---"; \
-		for i in $$(seq 1 10); do \
-			OMP_SCHEDULE=guided OMP_NUM_THREADS=$$t ./$(target) 8000 0.1 60; \
-		done \
-	done
-	@echo "Test completati!"
+	
 
-test_12_over_12_sch: $(target)
-	@echo "--- Test con 12000 corpi, dt = 0.1 e T = 60 ---"
-	@for t in 16 20 24 28 32; do \
-		echo "--- Esecuzione con $$t thread e schedule static---"; \
-		for i in $$(seq 1 10); do \
-			OMP_SCHEDULE=static OMP_NUM_THREADS=$$t ./$(target) 12000 0.1 60; \
-		done \
-	done
-	@for t in 16 20 24 28 32; do \
-		echo "--- Esecuzione con $$t thread e schedule dynamic---"; \
-		for i in $$(seq 1 10); do \
-			OMP_SCHEDULE=dynamic OMP_NUM_THREADS=$$t ./$(target) 12000 0.1 60; \
-		done \
-	done
-	@for t in 16 20 24 28 32; do \
-		echo "--- Esecuzione con $$t thread e schedule guided---"; \
-		for i in $$(seq 1 10); do \
-			OMP_SCHEDULE=guided OMP_NUM_THREADS=$$t ./$(target) 12000 0.1 60; \
-		done \
-	done
-	@echo "Test completati!"
-
-test_16_sch: $(target)
-	@echo "--- Test con 16000 corpi, dt = 0.1 e T = 60 ---"
-	@for t in 1 2 4 8 12 16 20 24 28 32; do \
-		echo "--- Esecuzione con $$t thread e schedule static---"; \
-		for i in $$(seq 1 5); do \
-			OMP_SCHEDULE=static OMP_NUM_THREADS=$$t ./$(target) 16000 0.1 60; \
-		done \
-	done
-	@for t in 1 2 4 8 12 16 20 24 28 32; do \
-		echo "--- Esecuzione con $$t thread e schedule dynamic---"; \
-		for i in $$(seq 1 5); do \
-			OMP_SCHEDULE=dynamic OMP_NUM_THREADS=$$t ./$(target) 16000 0.1 60; \
-		done \
-	done
-	@for t in 1 2 4 8 12 16 20 24 28 32; do \
-		echo "--- Esecuzione con $$t thread e schedule guided---"; \
-		for i in $$(seq 1 5); do \
-			OMP_SCHEDULE=guided OMP_NUM_THREADS=$$t ./$(target) 16000 0.1 60; \
-		done \
-	done
-	@echo "Test completati!"
-
-test_20_sch: $(target)
-	@echo "--- Test con 20000 corpi, dt = 0.1 e T = 60 ---"
-	@for t in 1 2 4 8 12 16 20 24 28 32; do \
-		echo "--- Esecuzione con $$t thread e schedule static---"; \
-		for i in $$(seq 1 5); do \
-			OMP_SCHEDULE=static OMP_NUM_THREADS=$$t ./$(target) 20000 0.1 60; \
-			sleep 30; \
-		done \
-	done
-	@for t in 1 2 4 8 12 16 20 24 28 32; do \
-		echo "--- Esecuzione con $$t thread e schedule dynamic---"; \
-		for i in $$(seq 1 5); do \
-			OMP_SCHEDULE=dynamic OMP_NUM_THREADS=$$t ./$(target) 20000 0.1 60; \
-			sleep 30; \
-		done \
-	done
-	@for t in 1 2 4 8 12 16 20 24 28 32; do \
-		echo "--- Esecuzione con $$t thread e schedule guided---"; \
-		for i in $$(seq 1 5); do \
-			OMP_SCHEDULE=guided OMP_NUM_THREADS=$$t ./$(target) 20000 0.1 60; \
-			sleep 30; \
-		done \
-	done
-	@echo "Test completati!"
-
-test_16_bis: $(target)
-	@echo "--- Test con 16000 corpi, dt = 0.1 e T = 60 ---"
-	@for t in 1 2 4 8 12 16 20 24 28 32; do \
-		echo "--- Esecuzione con $$t thread e schedule guided---"; \
-		for i in $$(seq 1 5); do \
-			OMP_SCHEDULE=guided OMP_NUM_THREADS=$$t ./$(target) 16000 0.1 60; \
-		done \
-	done
-	@echo "Test completati!"
 clean:
 	rm -f $(target) *.o
