@@ -9,56 +9,74 @@ $(target): $(target).cpp
 
 test: $(target)
 	@echo "--- Test con 4000 corpi, dt = 0.1 e T = 60 ---"
-	OMP_SCHEDULE=dynamic OMP_NUM_THREADS=12 ./$(target) 20000 0.1 60
+	 sleep 240;
+	OMP_SCHEDULE="dynamic,32" OMP_NUM_THREADS=12 ./$(target) 20000 0.1 60
 	@echo "Test completato!"
 
 
 test_1000: $(target)
-	@echo "Thread,Schedule,Run,Time" > risultati_1000.csv
-	@for s in static dynamic guided; do \
-		for t in 1 2 4 8 12 16 20 24 28 32; do \
-			echo "Testando $$s con $$t thread..."; \
-			for r in $$(seq 1 5); do \
-				TIME=$$(OMP_SCHEDULE=$$s OMP_NUM_THREADS=$$t ./$(target) 1000 0.1 60 | grep "Tempo" | awk '{print $$NF}'); \
-				echo "$$t,$$s,$$r,$$TIME" >> risultati_1000.csv; \
-			done \
-		done \
+	@echo "Thread,Schedule,Time" > risultati_1000_ott.csv
+	@for s in static "dynamic,16" "guided,16"; do \
+		for t in 1 2 4 8 12 16 32 64 128 256 512 1024; do \
+			printf "Testando %-12s con %4d thread... " "$$s" "$$t"; \
+			TIME=$$(OMP_SCHEDULE="$$s" OMP_NUM_THREADS=$$t ./$(target) 1000 0.1 60 | grep "Tempo" | awk '{print $$NF}'); \
+			echo "$$t,\"$$s\",$$TIME" >> risultati_1000_ott.csv; \
+			echo "Done ($$TIME s)"; \
+		done; \
+		echo "Raffreddamento in corso (180s)..."; \
+		sleep 180; \
 	done
 
 test_2000: $(target)
-	@echo "Thread,Schedule,Run,Time" > risultati_2000.csv
-	@for s in static dynamic guided; do \
-		for t in 1 2 4 8 12 16 20 24 28 32; do \
-			echo "Testando $$s con $$t thread..."; \
-			for r in $$(seq 1 5); do \
-				TIME=$$(OMP_SCHEDULE=$$s OMP_NUM_THREADS=$$t ./$(target) 2000 0.1 60 | grep "Tempo" | awk '{print $$NF}'); \
-				echo "$$t,$$s,$$r,$$TIME" >> risultati_2000.csv; \
-			done \
-		done \
+	@echo "Thread,Schedule,Time" > risultati_2000_ott.csv
+	@for s in static "dynamic,16" "guided,16"; do \
+		for t in 1 2 4 8 12 16 32 64 128 256 512 1024; do \
+			printf "Testando %-12s con %4d thread... " "$$s" "$$t"; \
+			TIME=$$(OMP_SCHEDULE="$$s" OMP_NUM_THREADS=$$t ./$(target) 2000 0.1 60 | grep "Tempo" | awk '{print $$NF}'); \
+			echo "$$t,\"$$s\",$$TIME" >> risultati_2000_ott.csv; \
+			echo "Done ($$TIME s)"; \
+		done; \
+		echo "Raffreddamento in corso (180s)..."; \
+		sleep 180; \
 	done
 
 test_4000: $(target)
-	@echo "Thread,Schedule,Run,Time" > risultati_4000.csv
-	@for s in static dynamic guided; do \
-		for t in 1 2 4 8 12 16 20 24 28 32; do \
-			echo "Testando $$s con $$t thread..."; \
-			for r in $$(seq 1 5); do \
-				TIME=$$(OMP_SCHEDULE=$$s OMP_NUM_THREADS=$$t ./$(target) 4000 0.1 60 | grep "Tempo" | awk '{print $$NF}'); \
-				echo "$$t,$$s,$$r,$$TIME" >> risultati_4000.csv; \
-			done \
-		done \
+	@echo "Thread,Schedule,Time" > risultati_4000_ott.csv
+	@for s in static "dynamic,16" "guided,16"; do \
+		for t in 1 2 4 8 12 16 32 64 128 256 512 1024; do \
+			printf "Testando %-12s con %4d thread... " "$$s" "$$t"; \
+			TIME=$$(OMP_SCHEDULE="$$s" OMP_NUM_THREADS=$$t ./$(target) 4000 0.1 60 | grep "Tempo" | awk '{print $$NF}'); \
+			echo "$$t,\"$$s\",$$TIME" >> risultati_4000_ott.csv; \
+			echo "Done ($$TIME s)"; \
+			echo "Raffreddamento in corso (60s)..."; \
+			sleep 60; \
+		done; \
+		echo "Raffreddamento in corso (180s)..."; \
+		sleep 180; \
 	done
 
-test_8000: $(target)
-	@echo "Thread,Schedule,Run,Time" > risultati_8000.csv
-	@for s in static dynamic guided; do \
-		for t in 1 2 4 8 12 16 20 24 28 32; do \
-			echo "Testando $$s con $$t thread..."; \
-			for r in $$(seq 1 5); do \
-				TIME=$$(OMP_SCHEDULE=$$s OMP_NUM_THREADS=$$t ./$(target) 8000 0.1 60 | grep "Tempo" | awk '{print $$NF}'); \
-				echo "$$t,$$s,$$r,$$TIME" >> risultati_8000.csv; \
-			done \
-		done \
+test_8000_12000: $(target)
+	@echo "Thread,Schedule,Time" > risultati_8000_ott.csv
+	@for s in static "dynamic,16" "guided,16"; do \
+		for t in 1 2 4 8 12 16 32 64 128 256 512 1024; do \
+			printf "Testando %-12s con %4d thread... " "$$s" "$$t"; \
+			TIME=$$(OMP_SCHEDULE="$$s" OMP_NUM_THREADS=$$t ./$(target) 8000 0.1 60 | grep "Tempo" | awk '{print $$NF}'); \
+			echo "$$t,\"$$s\",$$TIME" >> risultati_8000_ott.csv; \
+			echo "Done ($$TIME s)"; \
+			echo "Raffreddamento in corso (240s)..."; \
+			sleep 240; \
+		done; \
+	done
+	@echo "Thread,Schedule,Time" > risultati_12000_ott.csv
+	@for s in static "dynamic,16" "guided,16"; do \
+		for t in 1 2 4 8 12 16 32 64 128 256 512 1024; do \
+			printf "Testando %-12s con %4d thread... " "$$s" "$$t"; \
+			TIME=$$(OMP_SCHEDULE="$$s" OMP_NUM_THREADS=$$t ./$(target) 12000 0.1 60 | grep "Tempo" | awk '{print $$NF}'); \
+			echo "$$t,\"$$s\",$$TIME" >> risultati_12000_ott.csv; \
+			echo "Done ($$TIME s)"; \
+			echo "Raffreddamento in corso (240s)..."; \
+			sleep 240; \
+		done; \
 	done
 
 test_12000: $(target)
