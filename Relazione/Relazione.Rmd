@@ -1,0 +1,79 @@
+---
+title: "Problema N-corpi"
+author: 
+  - Samuel Paoli
+date: "`r Sys.Date()`"
+company: "Dipartimento di Ingegneria Industriale"
+header-includes:
+  - \renewcommand{\contentsname}{Indice}
+  - \renewcommand{\figurename}{Figura}
+  - \renewcommand{\tablename}{Tabella}
+output: 
+  memor::pdf_memo:
+    number_sections: true
+    libertine: false
+    toc: true
+    lof: false
+    lot: false
+---
+
+```{r setup, echo=FALSE, include=FALSE}
+library(tidyverse)
+library(tinytex)
+library(modelr)
+library(ROCR)
+library(knitr)
+library(boot)
+library(kableExtra)
+library(patchwork)
+source("Mylib.R")
+
+knitr::opts_chunk$set(
+  fig.align  = "left",        # allineamento figure
+  fig.dim    = c(5, 3) * 1.2, # rapporto larghezza/altezza e fattore di scala
+  out.height = "2.8in",       # altezza effettiva figure
+  message    = FALSE,         # sopprimi messaggi
+  warning    = FALSE,         # sopprimi warning
+  include    = TRUE,          # mostra l'output dei chunk successivi
+  tidy       = TRUE,          # formatta il codice dei chunk (richiede il pacchetto formatR)
+  tidy.opts  = list(width.cutoff = I(75)) # massima larghezza codice nei chunk
+)
+```
+
+```{r}
+gr_1000<-"../grafici_finale/tempi_1000.png"
+knitr::include_graphics(gr_1000)
+```
+
+
+
+
+# Introduzione
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -24,7 +24,7 @@ void force_velocity_position(Bodies& body, double dt) {
     double* p_fx = total_fx.data();
     double* p_fy = total_fy.data();
 
-    #pragma omp parallel for schedule(runtime) reduction(+: p_fx[:n], p_fy[:n]) default(none) shared(body, n, sic)
+    #pragma omp parallel for schedule(runtime) reduction(+: p_fx[:n], p_fy[:n]) default(none) shared(body) firstprivate(n, sic)
     for (int i = 0; i < n; ++i) {
         double xi = body.x[i];
         double yi = body.y[i];
@@ -50,7 +50,7 @@ void force_velocity_position(Bodies& body, double dt) {
         }
     }
 
-    #pragma omp parallel for schedule(static) default(none) shared(body, total_fx, total_fy, dt, n)
+    #pragma omp parallel for default(none) shared(body, total_fx, total_fy) firstprivate(dt, n)
     for (int i = 0; i < n; ++i) {
         body.vx[i] += (total_fx[i] / body.mass[i]) * dt;
         body.vy[i] += (total_fy[i] / body.mass[i]) * dt;
