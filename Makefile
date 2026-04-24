@@ -19,10 +19,9 @@ test_4000: $(target)
 		for t in 1 2 4 8 12 16 32 64 128 256; do \
 			printf "Testando %-12s con %4d thread... " "$$s" "$$t"; \
 			TIME=$$(OMP_SCHEDULE="$$s" OMP_NUM_THREADS=$$t ./$(target) 4000 0.1 60 | grep "Tempo" | awk '{print $$NF}'); \
-			echo "$$t,\"$$s\",$$TIME" >> risultati_4000_firstprivate.csv; \
+			echo "$$t,\"$$s\",$$TIME" >> risultati_4000_fin_fisso.csv; \
 			echo "Done ($$TIME s)"; \
 		done; \
-		sleep 180; \
 	done
 
 test_8000: $(target)
@@ -43,9 +42,8 @@ test_12000: $(target)
 		for t in 1 2 4 8 12 16 32 64 128 256; do \
 			printf "Testando %-12s con %4d thread... " "$$s" "$$t"; \
 			TIME=$$(OMP_SCHEDULE="$$s" OMP_NUM_THREADS=$$t ./$(target) 12000 0.1 60 | grep "Tempo" | awk '{print $$NF}'); \
-			echo "$$t,\"$$s\",$$TIME" >> risultati_12000_firstprivate.csv; \
+			echo "$$t,\"$$s\",$$TIME" >> risultati_12000_fin_fisso.csv; \
 			echo "Done ($$TIME s)"; \
-			sleep 180; \
 		done; \
 	done
 
@@ -57,7 +55,6 @@ test_16000: $(target)
 			TIME=$$(OMP_SCHEDULE="$$s" OMP_NUM_THREADS=$$t ./$(target) 16000 0.1 60 | grep "Tempo" | awk '{print $$NF}'); \
 			echo "$$t,\"$$s\",$$TIME" >> risultati_16000_firstprivate.csv; \
 			echo "Done ($$TIME s)"; \
-			sleep 240; \
 		done; \
 	done
 
@@ -67,16 +64,14 @@ test_20000: $(target)
 		for t in 1 2 4 8 12 16 32 64 128 256; do \
 			printf "Testando %-12s con %4d thread... " "$$s" "$$t"; \
 			TIME=$$(OMP_SCHEDULE="$$s" OMP_NUM_THREADS=$$t ./$(target) 20000 0.1 60 | grep "Tempo" | awk '{print $$NF}'); \
-			echo "$$t,\"$$s\",$$TIME" >> risultati_20000_firstprivate.csv; \
+			echo "$$t,\"$$s\",$$TIME" >> risultati_20000_fin_fisso.csv; \
 			echo "Done ($$TIME s)"; \
-			sleep 240; \
 		done; \
 	done
 
 test_completo: $(target)
-	
+	@$(MAKE) test_4000
 	@$(MAKE) test_12000
-	
 	@$(MAKE) test_20000
 
 
