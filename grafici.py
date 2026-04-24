@@ -32,56 +32,86 @@ g_2000.set_title("Tempi con 2000 corpi")
 plt.savefig(os.path.join('grafici_finale', 'tempi_2000.png'), dpi=300, bbox_inches='tight')
 plt.close()
 
-data_4000 = pd.read_csv("/home/samuel/progetto_parallellizzazione/risultati_ott/risultati_4000_ott.csv")
+data_4000 = pd.read_csv("/home/samuel/progetto_parallellizzazione/risultati_ott/risultati_4000_fin.csv")
 
 plt.figure(figsize=(10, 6))
 g_4000=sns.lineplot(data=data_4000, x='Thread', y='Time', hue='Schedule', marker='o')
 g_4000.set_xscale('log', base=2)
-g_4000.set_xticks([1, 2, 4, 8, 12, 16, 32, 64, 128, 256, 512, 1024])
-g_4000.set_xticklabels([1, 2, 4, 8, 12, 16, 32, 64, 128, 256, 512, 1024])
+g_4000.set_xticks([1, 2, 4, 8, 12, 16, 32, 64, 128, 256])
+g_4000.set_xticklabels([1, 2, 4, 8, 12, 16, 32, 64, 128, 256])
 g_4000.grid(True)
 g_4000.set_xlabel("Numero di Thread")
 g_4000.set_ylabel("Tempo (s)")
 g_4000.set_title("Tempi con 4000 corpi")
-plt.savefig(os.path.join('grafici_finale', 'tempi_4000.png'), dpi=300, bbox_inches='tight')
+plt.savefig(os.path.join('grafici_finale', 'tempi_4000_fin.png'), dpi=300, bbox_inches='tight')
 plt.close()
 
-data_8000 = pd.read_csv("/home/samuel/progetto_parallellizzazione/risultati_ott/risultati_8000_ott.csv")
+data_8000 = pd.read_csv("/home/samuel/progetto_parallellizzazione/risultati_ott/risultati_8000_fin.csv")
 
 plt.figure(figsize=(10, 6))
 g_8000=sns.lineplot(data=data_8000, x='Thread', y='Time', hue='Schedule', marker='o')
 g_8000.set_xscale('log', base=2)
-g_8000.set_xticks([1, 2, 4, 8, 12, 16, 32, 64, 128, 256, 512, 1024])
-g_8000.set_xticklabels([1, 2, 4, 8, 12, 16, 32, 64, 128, 256, 512, 1024])
+g_8000.set_xticks([1, 2, 4, 8, 12, 16, 32, 64, 128, 256])
+g_8000.set_xticklabels([1, 2, 4, 8, 12, 16, 32, 64, 128, 256])
 g_8000.grid(True)
 g_8000.set_xlabel("Numero di Thread")
 g_8000.set_ylabel("Tempo (s)")
 g_8000.set_title("Tempi con 8000 corpi")
-plt.savefig(os.path.join('grafici_finale', 'tempi_8000.png'), dpi=300, bbox_inches='tight')
+plt.savefig(os.path.join('grafici_finale', 'tempi_8000_fin.png'), dpi=300, bbox_inches='tight')
 plt.close()
 
-data_12000 = pd.read_csv("/home/samuel/progetto_parallellizzazione/risultati_ott/risultati_12000_ott.csv")
+data_12000 = pd.read_csv("/home/samuel/progetto_parallellizzazione/risultati_ott/risultati_12000_fin.csv")
 
 plt.figure(figsize=(10, 6))
 g_12000=sns.lineplot(data=data_12000, x='Thread', y='Time', hue='Schedule', marker='o')
 g_12000.set_xscale('log', base=2)
-g_12000.set_xticks([1, 2, 4, 8, 12, 16, 32, 64, 128, 256, 512, 1024])
-g_12000.set_xticklabels([1, 2, 4, 8, 12, 16, 32, 64, 128, 256, 512, 1024])
+g_12000.set_xticks([1, 2, 4, 8, 12, 16, 32, 64, 128, 256])
+g_12000.set_xticklabels([1, 2, 4, 8, 12, 16, 32, 64, 128, 256])
 g_12000.grid(True)
 g_12000.set_xlabel("Numero di Thread")
 g_12000.set_ylabel("Tempo (s)")
 g_12000.set_title("Tempi con 12000 corpi")
-plt.savefig(os.path.join('grafici_finale', 'tempi_12000.png'), dpi=300, bbox_inches='tight')
+plt.savefig(os.path.join('grafici_finale', 'tempi_12000_fin.png'), dpi=300, bbox_inches='tight')
+plt.close()
+
+data_16000 = pd.read_csv("/home/samuel/progetto_parallellizzazione/risultati_ott/risultati_16000_fin.csv")
+
+plt.figure(figsize=(10, 6))
+g_16000=sns.lineplot(data=data_16000, x='Thread', y='Time', hue='Schedule', marker='o')
+g_16000.set_xscale('log', base=2)
+g_16000.set_xticks([1, 2, 4, 8, 12, 16, 32, 64, 128, 256])
+g_16000.set_xticklabels([1, 2, 4, 8, 12, 16, 32, 64, 128, 256])
+g_16000.grid(True)
+g_16000.set_xlabel("Numero di Thread")
+g_16000.set_ylabel("Tempo (s)")
+g_16000.set_title("Tempi con 16000 corpi")
+plt.savefig(os.path.join('grafici_finale', 'tempi_16000_fin.png'), dpi=300, bbox_inches='tight')
+plt.close()
+
+data_20000 = pd.read_csv("/home/samuel/progetto_parallellizzazione/risultati_ott/risultati_20000_fin.csv")
+
+plt.figure(figsize=(10, 6))
+g_20000=sns.lineplot(data=data_20000, x='Thread', y='Time', hue='Schedule', marker='o')
+g_20000.set_xscale('log', base=2)
+g_20000.set_xticks([1, 2, 4, 8, 12, 16, 32, 64, 128, 256])
+g_20000.set_xticklabels([1, 2, 4, 8, 12, 16, 32, 64, 128, 256])
+g_20000.grid(True)
+g_20000.set_xlabel("Numero di Thread")
+g_20000.set_ylabel("Tempo (s)")
+g_20000.set_title("Tempi con 20000 corpi")
+plt.savefig(os.path.join('grafici_finale', 'tempi_20000_fin.png'), dpi=300, bbox_inches='tight')
 plt.close()
 
 # Speedup
 
 dataset_dict = {
-    '1000': data_1000, 
-    '2000': data_2000, 
+   # '1000': data_1000, 
+   # '2000': data_2000, 
     '4000': data_4000, 
     '8000': data_8000, 
-    '12000': data_12000
+    '12000': data_12000,
+    '16000': data_16000, 
+    '20000': data_20000
 }
 
 lista_per_unione_speedup = []
@@ -112,13 +142,13 @@ g_speedup = sns.relplot(
 )
 
 g_speedup.set(xscale='log') 
-valori_thread = [1, 2, 4, 8, 12, 16, 32, 64, 128, 256, 512, 1024]
+valori_thread = [1, 2, 4, 8, 12, 16, 32, 64, 128, 256]
 g_speedup.set(xticks=valori_thread)
 g_speedup.set_xticklabels(valori_thread, rotation=45)
 g_speedup.set_axis_labels("Numero di Thread", "Speedup")
 g_speedup.set_titles(col_template="Confronto speedup con schedule {col_name}")
 
-g_speedup.savefig(os.path.join('grafici_finale', 'confronto_speedup.png'), dpi=300, bbox_inches='tight')
+g_speedup.savefig(os.path.join('grafici_finale', 'confronto_speedup_fin.png'), dpi=300, bbox_inches='tight')
 
 plt.close()
 
@@ -157,6 +187,6 @@ g_eff.set_xticklabels(valori_thread, rotation=45)
 g_eff.set_axis_labels("Numero di Thread", "Efficienza (Speedup / Thread)")
 g_eff.set_titles(col_template="Confronto efficienza con schedule {col_name}")
 
-g_eff.savefig(os.path.join('grafici_finale', 'confronto_eff.png'), dpi=300, bbox_inches='tight')
+g_eff.savefig(os.path.join('grafici_finale', 'confronto_eff_fin.png'), dpi=300, bbox_inches='tight')
 
 plt.close()

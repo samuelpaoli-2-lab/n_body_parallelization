@@ -1,83 +1,84 @@
 CXX = g++
-CXXFLAGS = -fopenmp -O3 -march=native -ffast-math
+CXXFLAGS = -fopenmp -O3 -march=native -ffast-math -flto
 target = prova_1_n_body
+SRCS = $(target).cpp force_velocity_position.cpp
 
-all: $(target)
+all: $(target) $(target_serial)
 
-$(target): $(target).cpp
-	$(CXX) $(CXXFLAGS) -o $(target) $(target).cpp
+$(target): $(SRCS)
+	$(CXX) $(CXXFLAGS) -o $(target) $(SRCS)
 
 test: $(target)
-	OMP_SCHEDULE="dynamic,16" OMP_NUM_THREADS=12 ./$(target) 20000 0.1 60
-	OMP_SCHEDULE="dynamic,16" OMP_NUM_THREADS=12 ./$(target) 20000 0.1 60
-
-
-test_1000: $(target)
-	@echo "Thread,Schedule,Time" > risultati_1000_ott_firstpr.csv
-	@for s in static "dynamic,16" "guided"; do \
-		for t in 1 2 4 8 12 16 32 64 128 256 512 1024; do \
-			printf "Testando %-12s con %4d thread... " "$$s" "$$t"; \
-			TIME=$$(OMP_SCHEDULE="$$s" OMP_NUM_THREADS=$$t ./$(target) 1000 0.1 60 | grep "Tempo" | awk '{print $$NF}'); \
-			echo "$$t,\"$$s\",$$TIME" >> risultati_1000_ott_firstpr.csv; \
-			echo "Done ($$TIME s)"; \
-		done; \
-		sleep 240; \
-	done
-
-test_2000: $(target)
-	@echo "Thread,Schedule,Time" > risultati_2000_ott_firstpr.csv
-	@for s in static "dynamic,16" "guided"; do \
-		for t in 1 2 4 8 12 16 32 64 128 256 512 1024; do \
-			printf "Testando %-12s con %4d thread... " "$$s" "$$t"; \
-			TIME=$$(OMP_SCHEDULE="$$s" OMP_NUM_THREADS=$$t ./$(target) 2000 0.1 60 | grep "Tempo" | awk '{print $$NF}'); \
-			echo "$$t,\"$$s\",$$TIME" >> risultati_2000_ott_firstpr.csv; \
-			echo "Done ($$TIME s)"; \
-		done; \
-		sleep 240; \
-	done
+	OMP_SCHEDULE="dynamic, 3" OMP_NUM_THREADS=16 ./$(target) 8000 0.1 60
+	
+	
 
 test_4000: $(target)
-	@echo "Thread,Schedule,Time" > risultati_4000_ott_firstpr.csv
-	@for s in static "dynamic,16" "guided"; do \
-		for t in 1 2 4 8 12 16 32 64 128 256 512 1024; do \
+	@echo "Thread,Schedule,Time" > risultati_4000_firstprivate.csv
+	@for s in static "dynamic" "guided"; do \
+		for t in 1 2 4 8 12 16 32 64 128 256; do \
 			printf "Testando %-12s con %4d thread... " "$$s" "$$t"; \
 			TIME=$$(OMP_SCHEDULE="$$s" OMP_NUM_THREADS=$$t ./$(target) 4000 0.1 60 | grep "Tempo" | awk '{print $$NF}'); \
-			echo "$$t,\"$$s\",$$TIME" >> risultati_4000_ott_firstpr.csv; \
+			echo "$$t,\"$$s\",$$TIME" >> risultati_4000_firstprivate.csv; \
 			echo "Done ($$TIME s)"; \
-			sleep 100; \
 		done; \
+		sleep 180; \
 	done
 
 test_8000: $(target)
-	@echo "Thread,Schedule,Time" > risultati_8000_ott_firstpr.csv
-	@for s in static "dynamic,16" "guided"; do \
-		for t in 1 2 4 8 12 16 32 64 128 256 512 1024; do \
+	@echo "Thread,Schedule,Time" > risultati_8000_firstprivate.csv
+	@for s in static "dynamic" "guided"; do \
+		for t in 1 2 4 8 12 16 32 64 128 256; do \
 			printf "Testando %-12s con %4d thread... " "$$s" "$$t"; \
 			TIME=$$(OMP_SCHEDULE="$$s" OMP_NUM_THREADS=$$t ./$(target) 8000 0.1 60 | grep "Tempo" | awk '{print $$NF}'); \
-			echo "$$t,\"$$s\",$$TIME" >> risultati_8000_ott_firstpr.csv; \
+			echo "$$t,\"$$s\",$$TIME" >> risultati_8000_firstprivate.csv; \
+			echo "Done ($$TIME s)"; \
+			sleep 120; \
+		done; \
+	done
+
+test_12000: $(target)
+	@echo "Thread,Schedule,Time" > risultati_12000_firstprivate.csv
+	@for s in static "dynamic" "guided"; do \
+		for t in 1 2 4 8 12 16 32 64 128 256; do \
+			printf "Testando %-12s con %4d thread... " "$$s" "$$t"; \
+			TIME=$$(OMP_SCHEDULE="$$s" OMP_NUM_THREADS=$$t ./$(target) 12000 0.1 60 | grep "Tempo" | awk '{print $$NF}'); \
+			echo "$$t,\"$$s\",$$TIME" >> risultati_12000_firstprivate.csv; \
 			echo "Done ($$TIME s)"; \
 			sleep 180; \
 		done; \
 	done
 
-test_12000: $(target)
-	@echo "Thread,Schedule,Time" > risultati_12000_ott_firstpr.csv
-	@for s in static "dynamic,16" "guided"; do \
-		for t in 1 2 4 8 12 16 32 64 128 256 512 1024; do \
+test_16000: $(target)
+	@echo "Thread,Schedule,Time" > risultati_16000_firstprivate.csv
+	@for s in static "dynamic" "guided"; do \
+		for t in 1 2 4 8 12 16 32 64 128 256; do \
 			printf "Testando %-12s con %4d thread... " "$$s" "$$t"; \
-			TIME=$$(OMP_SCHEDULE="$$s" OMP_NUM_THREADS=$$t ./$(target) 12000 0.1 60 | grep "Tempo" | awk '{print $$NF}'); \
-			echo "$$t,\"$$s\",$$TIME" >> risultati_12000_ott_firstpr.csv; \
+			TIME=$$(OMP_SCHEDULE="$$s" OMP_NUM_THREADS=$$t ./$(target) 16000 0.1 60 | grep "Tempo" | awk '{print $$NF}'); \
+			echo "$$t,\"$$s\",$$TIME" >> risultati_16000_firstprivate.csv; \
+			echo "Done ($$TIME s)"; \
+			sleep 240; \
+		done; \
+	done
+
+test_20000: $(target)
+	@echo "Thread,Schedule,Time" > risultati_20000_firstprivate.csv
+	@for s in static "dynamic" "guided"; do \
+		for t in 1 2 4 8 12 16 32 64 128 256; do \
+			printf "Testando %-12s con %4d thread... " "$$s" "$$t"; \
+			TIME=$$(OMP_SCHEDULE="$$s" OMP_NUM_THREADS=$$t ./$(target) 20000 0.1 60 | grep "Tempo" | awk '{print $$NF}'); \
+			echo "$$t,\"$$s\",$$TIME" >> risultati_20000_firstprivate.csv; \
 			echo "Done ($$TIME s)"; \
 			sleep 240; \
 		done; \
 	done
 
 test_completo: $(target)
-	@$(MAKE) test_1000
-	@$(MAKE) test_2000
-	@$(MAKE) test_4000
-	@$(MAKE) test_8000
+	
 	@$(MAKE) test_12000
+	
+	@$(MAKE) test_20000
+
 
 test_private: $(target)
 
@@ -97,6 +98,8 @@ test_private: $(target)
 		done; \
 	done
 	@rm -f temp_out.txt
+
+
 
 
 clean:
