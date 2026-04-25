@@ -13,7 +13,8 @@ int main(int argc, char* argv[]){
     
     int num_part = stoi(argv[1]);
     double dt = stod(argv[2]);
-    double T = stod(argv[3]);    
+    double T = stod(argv[3]); 
+    int sim = stoi(argv[4]);   
 
     Bodies universe;
     universe.x.resize(num_part);
@@ -43,29 +44,42 @@ int main(int argc, char* argv[]){
         universe.mass[i] = gen_mass;
     }
 
-    ofstream outFile("punti_prova_progetto.csv");
-    outFile << "T";
-    for(int i=0; i<num_part; ++i){
-        outFile << ",X" << i << ",Y" << i;
-    }
-    outFile << "\n";
-
-    double start_time=omp_get_wtime();
+    if(sim==0){
+        double start_time=omp_get_wtime();
      
-    for(double i=0; i<=T; i+=dt){
-        force_velocity_position(universe, dt);
-        outFile << i;
+        for(double i=0; i<=T; i+=dt){
+            force_velocity_position(universe, dt);
+        }
+        double end_time=omp_get_wtime();
 
-        for(int j=0; j<num_part;++j){
-            outFile << "," << universe.x[j] << "," << universe.y[j];
+        printf("Tempo di esecuzione: %f \n", end_time-start_time);
+    }else{
+
+        ofstream outFile("punti_prova_progetto.csv");
+        outFile << "T";
+        for(int i=0; i<num_part; ++i){
+            outFile << ",X" << i << ",Y" << i;
         }
         outFile << "\n";
-    }
-    
-    outFile.close();
-    double end_time=omp_get_wtime();
 
-    printf("Tempo di esecuzione: %f \n", end_time-start_time);
+        double start_time=omp_get_wtime();
+        
+        for(double i=0; i<=T; i+=dt){
+            force_velocity_position(universe, dt);
+            outFile << i;
+
+            for(int j=0; j<num_part;++j){
+                outFile << "," << universe.x[j] << "," << universe.y[j];
+            }
+            outFile << "\n";
+        }
+        
+        outFile.close();
+        double end_time=omp_get_wtime();
+
+        printf("Tempo di esecuzione: %f \n", end_time-start_time);
+
+    }
 
     return 0;
 
