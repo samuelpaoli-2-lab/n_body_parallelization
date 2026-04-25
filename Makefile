@@ -18,6 +18,7 @@ test_4000: $(target)
 			echo "$$t,\"$$s\",$$TIME" >> risultati_4000.csv; \
 			echo "Done ($$TIME s)"; \
 		done; \
+	sleep 120;
 	done
 
 test_8000: $(target)
@@ -40,6 +41,7 @@ test_12000: $(target)
 			TIME=$$(OMP_SCHEDULE="$$s" OMP_NUM_THREADS=$$t ./$(target) 12000 0.1 60 0 | grep "Tempo" | awk '{print $$NF}'); \
 			echo "$$t,\"$$s\",$$TIME" >> risultati_12000.csv; \
 			echo "Done ($$TIME s)"; \
+			sleep 180;
 		done; \
 	done
 
@@ -51,6 +53,7 @@ test_16000: $(target)
 			TIME=$$(OMP_SCHEDULE="$$s" OMP_NUM_THREADS=$$t ./$(target) 16000 0.1 60 0 | grep "Tempo" | awk '{print $$NF}'); \
 			echo "$$t,\"$$s\",$$TIME" >> risultati_16000.csv; \
 			echo "Done ($$TIME s)"; \
+			sleep 240;
 		done; \
 	done
 
@@ -62,6 +65,7 @@ test_20000: $(target)
 			TIME=$$(OMP_SCHEDULE="$$s" OMP_NUM_THREADS=$$t ./$(target) 20000 0.1 60 0 | grep "Tempo" | awk '{print $$NF}'); \
 			echo "$$t,\"$$s\",$$TIME" >> risultati_20000.csv; \
 			echo "Done ($$TIME s)"; \
+			sleep 240;
 		done; \
 	done
 
